@@ -36,15 +36,15 @@ def get_ip_info(ip):
 # Функция для вывода информации по IP
 def print_ip_info(ip_info):
     if ip_info:
-        print("Country:", ip_info["country"])
-        print("Country Code:", ip_info["countryCode"])
-        print("Region:", ip_info["regionName"])
-        print("City:", ip_info["city"])
-        print("Zip Code:", ip_info["zip"])
-        print("Latitude:", ip_info["lat"])
-        print("Longitude:", ip_info["lon"])
-        print("Timezone:", ip_info["timezone"])
-        print("ISP:", ip_info["isp"])
+        print("├Страна:", ip_info["country"])
+        print("├Код страны:", ip_info["countryCode"])
+        print("├Регион:", ip_info["regionName"])
+        print("├Город:", ip_info["city"])
+        print("├Почтовый индекс:", ip_info["zip"])
+        print("├Широта:", ip_info["lat"])
+        print("├Долгота:", ip_info["lon"])
+        print("├Часовой пояс:", ip_info["timezone"])
+        print("└Интернет-провайдер:", ip_info["isp"])
     else:
         print("Информация по этому IP не найдена.")
 
@@ -65,12 +65,12 @@ def clear_screen():
 # Функция для вывода ASCII-арт и меню выбора
 def display_menu():
     print(Fore.RED + """
-██╗░░██╗░█████╗░██╗░░░██╗███╗░░██╗████████╗
-██║░░██║██╔══██╗██║░░░██║████╗░██║╚══██╔══╝
-███████║███████║██║░░░██║██╔██╗██║░░░██║░░░
-██╔══██║██╔══██║██║░░░██║██║╚████║░░░██║░░░
-██║░░██║██║░░██║╚██████╔╝██║░╚███║░░░██║░░░
-╚═╝░░╚═╝╚═╝░░╚═╝░╚═════╝░╚═╝░░╚══╝░░░╚═╝░░░
+██╗░░██╗░█████╗░██╗░░░██╗███╗░░██╗████████╗  ██╗██████╗░
+██║░░██║██╔══██╗██║░░░██║████╗░██║╚══██╔══╝  ██║██╔══██╗
+███████║███████║██║░░░██║██╔██╗██║░░░██║░░░  ██║██████╔╝
+██╔══██║██╔══██║██║░░░██║██║╚████║░░░██║░░░  ██║██╔═══╝░
+██║░░██║██║░░██║╚██████╔╝██║░╚███║░░░██║░░░  ██║██║░░░░░
+╚═╝░░╚═╝╚═╝░░╚═╝░╚═════╝░╚═╝░░╚══╝░░░╚═╝░░░  ╚═╝╚═╝░░░░░
     """)
     print("Выберите действие:")
     print("1. Поиск информации по IP")
@@ -87,7 +87,7 @@ def main():
     while True:
         clear_screen()  # Очищаем экран при каждом запуске цикла
         display_menu()
-        choice = input("Введите цифру для выбора услуги: ")
+        choice = input(": ")
 
         if choice == "1":
             ip = input("Введите IP адрес: ").strip()
