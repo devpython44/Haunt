@@ -87,7 +87,7 @@ def main():
     while True:
         clear_screen()  # Очищаем экран при каждом запуске цикла
         display_menu()
-        choice = input(": ")
+        choice = input("Выберете действия: ")
 
         if choice == "1":
             ip = input("Введите IP адрес: ").strip()
@@ -107,7 +107,7 @@ def main():
 
             # Показать меню с дальнейшими действиями
             post_ip_info_menu()
-            next_action = input("Введите цифру для выбора действия: ")
+            next_action = input("Выберете действия: ")
             
             if next_action == "2":
                 print("Выход из программы...")
