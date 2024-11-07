@@ -28,18 +28,11 @@ class SocialDeanon:
         req_list = [
             'https://www.instagram.com/',
             'https://github.com/',
-            'https://rt.pornhub.com/users/',
             'https://ok.ru/',
             'https://vk.com/',
             'https://soundcloud.com/',
-            'https://www.tumblr.com/blog/view/',
             'https://twitter.com/',
-            'https://ask.fm/',
             'https://znanija.com/app/profile/',
-            'https://www.deviantart.com/',
-            'https://www.flickr.com/',
-            'https://ru.linkedin.com/in/',
-            'https://myspace.com/',
             'https://www.pinterest.com/',
             'https://www.reddit.com/r/',
             'https://www.reddit.com/user/'
