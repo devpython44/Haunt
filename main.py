@@ -1,6 +1,7 @@
 import os
 import requests
 from colorama import Fore, init
+import social as sd  # Импортируем модуль social, где определен класс SocialDeanon
 
 # Инициализация colorama для поддержки цветного вывода
 init(autoreset=True)
@@ -10,21 +11,18 @@ cache = {}
 
 # Функция для получения информации об IP
 def get_ip_info(ip):
-    # Проверка на наличие IP в кэше
     if ip in cache:
         print("Данные из кэша...")
         return cache[ip]
     
-    # Запрос к API
     url = f"http://ip-api.com/json/{ip}"
     try:
         response = requests.get(url, timeout=5)
-        response.raise_for_status()  # Проверка на успешный статус запроса
+        response.raise_for_status()
         data = response.json()
 
-        # Проверка успешности данных
         if data.get("status") == "success":
-            cache[ip] = data  # Сохраняем данные в кэш
+            cache[ip] = data
             return data
         else:
             print("Ошибка: Невозможно получить информацию по IP.")
@@ -74,48 +72,75 @@ def display_menu():
 """)
     print("Выберите действие:")
     print("1. Поиск информации по IP")
-    print("2. Выход")
+    print("2. Поиск в социальных сетях")
+    print("3. Выход")
 
-# Функция для показа меню после получения информации по IP
-def post_ip_info_menu():
-    print("\nЧто вы хотите сделать дальше?")
-    print("1. Дальше")
-    print("2. Выход")
+# Функция для отображения результатов поиска в соцсетях
+def display_social_search():
+    nickname = input("Введите никнейм для поиска: ").strip()
+    deanon = sd.SocialDeanon(nickname)
+
+    clear_screen()
+    print(Fore.RED + f"Результаты поиска для никнейма '{nickname}':\n")
+    profiles = deanon.availability()
+
+    if profiles:
+        print("Найдены профили:")
+        for profile in profiles:
+            print(f"  {profile}")
+    else:
+        print("Профили с таким ником не найдены.")
+
+    post_search_menu()
+
+# Функция для меню дальнейших действий
+def post_search_menu():
+    while True:
+        print("\nЧто вы хотите сделать дальше?")
+        print("1. Повторить поиск")
+        print("2. Вернуться в главное меню")
+        print("3. Выйти")
+        choice = input("Выберите действие: ")
+
+        if choice == "1":
+            return  # Повторит поиск, вернется в функцию
+        elif choice == "2":
+            break  # Вернется в главное меню
+        elif choice == "3":
+            print("Выход из программы...")
+            exit()
+        else:
+            print("Неверный выбор. Попробуйте снова.")
 
 # Главная функция
 def main():
-    while True:
-        clear_screen()  # Очищаем экран при каждом запуске цикла
+    running = True  # Флаг для работы основного цикла
+
+    while running:
+        clear_screen()
         display_menu()
-        choice = input("Выберете ваше действия: ")
+        choice = input("Выберите ваше действие: ")
 
         if choice == "1":
             ip = input("Введите IP адрес: ").strip()
             
-            # Убедимся, что введен правильный формат IP
             if not validate_ip(ip):
                 print("Неверный формат IP адреса.")
                 continue
 
-            # Получаем информацию по IP
             ip_info = get_ip_info(ip)
-
-            # Очистка экрана перед выводом информации
             clear_screen()
             print(Fore.RED + "Информация о IP:\n")
             print_ip_info(ip_info)
-
-            # Показать меню с дальнейшими действиями
-            post_ip_info_menu()
-            next_action = input("Выберете действия: ")
-            
-            if next_action == "2":
-                print("Выход из программы...")
-                break
+            post_search_menu()
 
         elif choice == "2":
+            clear_screen()
+            display_social_search()
+
+        elif choice == "3":
             print("Выход из программы...")
-            break
+            running = False  # Устанавливаем флаг для завершения основного цикла
         else:
             print("Неверный выбор. Пожалуйста, попробуйте снова.")
 
